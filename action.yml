@@ -2,9 +2,18 @@ name: Generate Nix Hash
 description: Github Action to write a JSON file with rev and sha256 of given repository revision.
 author: Tobias Happ
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  rev:
+    description: Revision to check out
+    required: true
+  owner:
+    description: Owner of Github repository
+    required: true
+  repo:
+    description: Name of Github repository
+    required: true
+  file:
+    description: Path to destination JSON file
+    required: true
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: node12
+  main: dist/index.js

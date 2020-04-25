@@ -1,18 +1,26 @@
-import * as core from '@actions/core'
-import {wait} from './wait'
+import {getInput, setFailed} from '@actions/core'
+import {exec} from 'child_process'
+import {writeFileSync} from 'fs'
+import {promisify} from 'util'
+
+const execAsync = promisify(exec)
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    const rev: string = getInput('rev')
+    const owner: string = getInput('owner')
+    const repo: string = getInput('repo')
+    const file: string = getInput('file')
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const command = `nix-prefetch-url --unpack "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz"`
+    const {stdout} = await execAsync(command)
 
-    core.setOutput('time', new Date().toTimeString())
+    const result = {rev, sha256: stdout.trim()}
+    const content = `${JSON.stringify(result, null, 2)}\n`
+
+    writeFileSync(file, content)
   } catch (error) {
-    core.setFailed(error.message)
+    setFailed(error.message)
   }
 }
 

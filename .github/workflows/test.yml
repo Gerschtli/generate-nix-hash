@@ -6,16 +6,42 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - run: |
-        npm install
-        npm run all
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run lints, tests and build package
+        run: |
+          npm install
+          npm run all
+
 
   test:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - uses: ./
-      with:
-        milliseconds: 1000
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v8
+
+      - name: Run generate-nix-hash action
+        uses: ./
+        with:
+          rev: c61573364694a68d9993c8b0fb603b29e7251d79  # initial commit
+          owner: Gerschtli
+          repo: generate-nix-hash
+          file: config.json
+
+      - name: Verify results
+        run: |
+          cat > expected.json <<EOF
+          {
+            "rev": "c61573364694a68d9993c8b0fb603b29e7251d79",
+            "sha256": "1s0qrrin8ry9klvjaxj4hd3qlf3cayfisq8pn7idqddgcg0lc079"
+          }
+          EOF
+
+          diff config.json expected.json
