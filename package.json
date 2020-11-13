@@ -26,21 +26,21 @@
   "author": "Tobias Happ",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "1.2.6"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.3",
-    "@types/node": "^13.13.30",
-    "@typescript-eslint/parser": "^2.34.0",
-    "@zeit/ncc": "^0.22.3",
-    "eslint": "^6.8.0",
-    "eslint-plugin-github": "^3.4.1",
-    "eslint-plugin-jest": "^23.20.0",
-    "jest": "^25.5.4",
-    "jest-circus": "^25.5.4",
-    "js-yaml": "^3.14.0",
-    "prettier": "^2.1.2",
-    "ts-jest": "^25.5.1",
-    "typescript": "^3.9.7"
+    "@types/jest": "25.2.3",
+    "@types/node": "13.13.30",
+    "@typescript-eslint/parser": "2.34.0",
+    "@zeit/ncc": "0.22.3",
+    "eslint": "6.8.0",
+    "eslint-plugin-github": "3.4.1",
+    "eslint-plugin-jest": "23.20.0",
+    "jest": "25.5.4",
+    "jest-circus": "25.5.4",
+    "js-yaml": "3.14.0",
+    "prettier": "2.1.2",
+    "ts-jest": "25.5.1",
+    "typescript": "3.9.7"
   }
 }
