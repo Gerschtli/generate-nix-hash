@@ -1,7 +1,7 @@
 import {getInput, setFailed} from '@actions/core'
 import {exec} from 'child_process'
-import {writeFileSync} from 'fs'
 import {promisify} from 'util'
+import {writeFileSync} from 'fs'
 
 const execAsync = promisify(exec)
 
@@ -19,8 +19,9 @@ async function run(): Promise<void> {
     const content = `${JSON.stringify(result, null, 2)}\n`
 
     writeFileSync(file, content)
-  } catch (error) {
-    setFailed(error.message)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    setFailed(error?.message)
   }
 }
 
