@@ -1,5 +1,5 @@
 with import <nixpkgs> { };
 
 mkShell {
-  buildInputs = [ nodejs-12_x ];
+  buildInputs = [ nodejs-16_x ];
 }
