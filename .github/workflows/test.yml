@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run lints, tests and build package
         run: |
@@ -22,10 +22,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install nix
-        uses: cachix/install-nix-action@v12
+        uses: cachix/install-nix-action@v18
 
       - name: Run generate-nix-hash action
         uses: ./
